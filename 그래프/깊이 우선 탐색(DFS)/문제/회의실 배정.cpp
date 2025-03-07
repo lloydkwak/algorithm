@@ -87,18 +87,18 @@ vector<int> solve2SAT() {
     int N = adj.size() / 2;  //변수의 수
     vector<int> label = tarjanSCC();
     //한 변수의 참, 거짓이 하나의 SCC 요소에 속한 경우
-    for(int i = 0; i < 2 * n; i += 2){
+    for(int i = 0; i < 2 * N; i += 2){
         if(label[i] == label[i + 1]){
             return vector<int>();
         }
     }
-    vector<int> value(2 * n, -1);
+    vector<int> value(2 * N, -1);
     vector<pair<int, int>> order;
-    for(int i = 0; i < 2 * n; ++i){
+    for(int i = 0; i < 2 * N; ++i){
         order.push_back(make_pair(-label[i], i));
     }
     sort(order.begin(), order.end());
-    for(int i = 0; i < 2 * n; ++i){
+    for(int i = 0; i < 2 * N; ++i){
         int vertex = order[i].second;
         int variable = vertex / 2, isTrue = vertex % 2 == 0;
         if(value[variable] != -1) continue;
